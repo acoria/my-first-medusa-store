@@ -20,14 +20,17 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 
   //all fields from brand (*)
   //and all fields from relation product (products.*)
-  const { data: brands } = await query.graph({
-    entity: "brand",
-    fields: ["*", "products.*"],
-    //retrieve id and name field
-    // fields: ["id", "name"],
-    //retrieve all brand properties and the id and name of the related product
-    // fields: ["*", "products.id", "products.title"],
-  });
+  const { data: brands, metadata: { count, take, skip } = {} } =
+    await query.graph({
+      entity: "brand",
+      ...req.queryConfig, //adds the count, take and skip parameters
+      fields: ["*", "products.*"],
+      //retrieve id and name field
+      // fields: ["id", "name"],
+      //retrieve all brand properties and the id and name of the related product
+      // fields: ["*", "products.id", "products.title"],
+    });
 
-  res.json({ brands });
+  //add pagination information to the response with count, limit and offset
+  res.json({ brands, count, limit: take, offset: skip });
 };
