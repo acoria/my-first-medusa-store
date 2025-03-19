@@ -1,9 +1,9 @@
 import { Module } from "@medusajs/framework/utils";
-import Product_OriginModuleService from "./service";
+import Product_originModuleService from "./service";
 
-export const PRODUCT_ORIGIN_MODULE = "product_Origin";
+export const PRODUCT_ORIGIN_MODULE = "product_origin";
 
-const Product_OriginModule = Module(PRODUCT_ORIGIN_MODULE, {
-  service: Product_OriginModuleService,
+const Product_originModule = Module(PRODUCT_ORIGIN_MODULE, {
+  service: Product_originModuleService,
 });
-export default Product_OriginModule;
+export default Product_originModule;

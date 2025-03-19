@@ -6,7 +6,7 @@ import {
 import { createFindParams } from "@medusajs/medusa/api/utils/validators";
 import { z } from "zod";
 import { PostAdminCreateBrand } from "./admin/brands/validators";
-import { PostAdminCreateProduct_Origin } from "./admin/product_Origins/validators";
+import { PostAdminCreateProduct_origin } from "./admin/product_origins/validators";
 
 
 // A Zod schema that a request's parameter must satisfy. 
@@ -26,18 +26,18 @@ export default defineMiddlewares({
     },
     {
       //adds a validation to the received data -> can be accessed via req.validatedBody
-      matcher: "/admin/product_Origins",
+      matcher: "/admin/product_origins",
       method: "POST",
-      middlewares: [validateAndTransformBody(PostAdminCreateProduct_Origin)],
+      middlewares: [validateAndTransformBody(PostAdminCreateProduct_origin)],
     },
     {
-      //validates additionally passed data, here the brand_id & product_Origin
+      //validates additionally passed data, here the brand_id & product_origin
       matcher: "/admin/products",
       method: "POST",
       additionalDataValidator: {
         brand_id: z.number().optional(),
         // brand_id: z.string().optional(),
-        product_Origin_id: z.string().optional()
+        product_origin_id: z.string().optional()
       },
     },
     {

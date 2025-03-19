@@ -18,7 +18,7 @@ module.exports = defineConfig({
       resolve: "./src/modules/brand",
     },
     {
-      resolve: "./src/modules/product_Origin",
+      resolve: "./src/modules/product_origin",
     },
   ],
 });
