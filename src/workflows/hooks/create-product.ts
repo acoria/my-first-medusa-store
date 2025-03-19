@@ -4,8 +4,8 @@ import BrandModuleService from "../../modules/brand/service";
 import { BRAND_MODULE } from "../../modules/brand";
 import { LinkDefinition } from "@medusajs/framework/types";
 import { Modules } from "@medusajs/framework/utils";
-import { PRODUCT_ORIGIN_MODULE } from "../../modules/productOrigin";
-import ProductOriginModuleService from "../../modules/productOrigin/service";
+import { PRODUCT_ORIGIN_MODULE } from "../../modules/product_Origin";
+import Product_OriginModuleService from "../../modules/product_Origin/service";
 
 /**
  * A hook is a possibility to access certain points in time during a workflow, e.g. when a product was created.
@@ -13,7 +13,7 @@ import ProductOriginModuleService from "../../modules/productOrigin/service";
 
 createProductsWorkflow.hooks.productsCreated(
   async ({ products, additional_data }, { container }) => {
-    if (!additional_data?.brand_id && !additional_data?.productOrigin_id) {
+    if (!additional_data?.brand_id && !additional_data?.product_Origin_id) {
       return new StepResponse([], []);
     }
 
@@ -25,11 +25,11 @@ createProductsWorkflow.hooks.productsCreated(
         additional_data.brand_id as string
       );
     }
-    if (additional_data?.productOrigin_id) {
-      const productOriginModuleService: ProductOriginModuleService =
+    if (additional_data?.product_Origin_id) {
+      const product_OriginModuleService: Product_OriginModuleService =
         container.resolve(PRODUCT_ORIGIN_MODULE);
-      await productOriginModuleService.retrieveProductOrigin(
-        additional_data.productOrigin_id as string
+      await product_OriginModuleService.retrieveProduct_Origin(
+        additional_data.product_Origin_id as string
       );
     }
 
@@ -52,13 +52,13 @@ createProductsWorkflow.hooks.productsCreated(
           },
         });
       }
-      if (additional_data?.productOrigin_id) {
+      if (additional_data?.product_Origin_id) {
         links.push({
           [Modules.PRODUCT]: {
             product_id: product.id,
           },
           [PRODUCT_ORIGIN_MODULE]: {
-            productOrigin_id: additional_data.productOrigin_id,
+            product_origin_id: additional_data.product_Origin_id,
           },
         });
       }
